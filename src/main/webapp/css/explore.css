@@ -1,0 +1,219 @@
+/*Font import*/
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+/*Styles for all html*/
+* {
+    margin: 0;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+/*Styles for body*/
+body {
+    font-family: sans-serif;
+    padding: 90px 20px 0;
+    background: #222228;
+}
+
+/*Nav logo style*/
+.favicon {
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: -35px;
+}
+
+/*Styles applied to the header*/
+.header {
+    background-color: #1c1c1f;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+}
+
+/*Styles applied to the nav*/
+.nav {
+    padding: 5px;
+    display: flex;
+    max-width: 1300px;
+    justify-content: space-between;
+    margin: 0 auto;
+
+}
+
+/*Styles applied to texts with links*/
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+/*Styles applied to the text ClosedSea*/
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+    left: -320px;
+    padding: 0 40px;
+    line-height: 80px;
+}
+
+/*Styles applied to the menu inside the nav*/
+.nav-menu {
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+}
+
+/*Styles applied to menu items*/
+.nav-menu-item {
+    font-size: 18px;
+    margin: 0 10px;
+    line-height: 80px;
+    text-transform: none;
+    width: max-content;
+}
+
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+/*Transition when hovering the mouse over menu items*/
+.nav-menu-link:hover {
+    background-color: #565454;
+    transition: 0.5s;
+}
+
+/* cierre de estilos nav*/
+
+/*Inicio estilos explore*/
+
+/*Styles applied to the title*/
+.tittle {
+    color: white;
+    padding-top: 20px;
+}
+
+/*Styles applied to the cards container*/
+.container_card {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 100px;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/*Styles applied to fhater card */
+.card_father {
+    margin: 15px;
+    perspective: 1000px;
+
+}
+
+/*hover effect applied to father card*/
+.card_father:hover .card {
+    transform: rotateY(180deg);
+}
+
+/*Styles applied to cards*/
+.card {
+    width: 350px;
+    height: 400px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 600ms;
+
+}
+
+/*Styles applied to the front of the card*/
+.card_front {
+    background-size: cover;
+    background-position: center;
+}
+
+/*Styles applied to the front and back of the card*/
+.card_front,
+.card_back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    border-radius: 20px;
+
+}
+
+/*Styles applied to the back of the chart*/
+.card_back {
+    transform: rotateY(180deg);
+    background-color: white;
+}
+
+/*Styles applied to the front body of the card*/
+.body_card_front {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    color: white;
+    transform: translateZ(60px);
+
+}
+
+/*Styles applied to the background of the card*/
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+/*Styles applied for the back body of the card*/
+.body_card_back {
+    padding: 40px;
+    text-align: center;
+    transform: translateZ(60px);
+}
+
+/*Styles applied to the back paragraph*/
+.body_card_back p {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+/*Styles applied for back button*/
+.body_card_back input {
+    padding: 10px 40px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: darkslategrey;
+    box-shadow: 1px 1px 20px -5px #58B0F6;
+    border-radius: 10px;
+    transition: box-shadow 600ms;
+}
+
+/*Styles applied with effect for the button on the back of the card*/
+.body_card_back input:hover {
+    box-shadow: 1px 1px 30px -5px #449de6;
+}

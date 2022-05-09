@@ -1,0 +1,224 @@
+/*shapes the body of the window*/
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 90px 20px 0;
+    background: #222228;
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+/*Header styles
+
+/**
+Logo image in the navbar
+*/
+.favicon {
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 470px;
+}
+
+/**
+Gives style to all header
+*/
+.header {
+    background-color: #1c1c1f;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/**
+Gives style to all nav label
+*/
+.nav {
+    padding: 5px;
+    display: flex;
+    max-width: 1200px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+/**
+Gives style to nav links
+*/
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/**
+Logo text next to the logo image
+*/
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    padding: 0 40px;
+    line-height: 80px;
+    position: relative;
+    left: -450px;
+}
+
+/**
+Navbar menu style
+*/
+.nav-menu {
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+}
+
+/**
+Gives style to all nav links
+*/
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+/**
+when the course passes next to a navbar element, it will light up.
+*/
+.nav-menu-link:hover {
+    background-color: #565454;
+    transition: 0.5s;
+}
+
+
+/*gives the characteristics to the text boxes*/
+.contenedor {
+    width: 100%;
+    padding: 15px;
+}
+
+/*creates the box that contains the text fields*/
+.formulario {
+    background: #fff;
+    margin-top: 150px;
+    padding: 3px;
+}
+
+/*style titles*/
+h1 {
+    text-align: center;
+    color: #222228;
+    font-size: 40px;
+    font-family: sans-serif;
+}
+
+/*gives characteristics to the inputs*/
+input[type="text"],
+input[type="password"] {
+    font-size: 20px;
+    width: 82%;
+    padding: 10px;
+    border: none;
+}
+
+/*gives characteristics to the inputs*/
+.input-contenedor {
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+
+/*give characteristics to the icons*/
+.icon {
+    min-width: 50px;
+    text-align: center;
+    color: #999;
+}
+
+/*gives characteristics to the buttons*/
+.button {
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background: #222228;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/*gives characteristics to the buttons*/
+.button:hover {
+    background: cadetblue;
+}
+
+/*gives characteristics to the text*/
+p {
+    text-align: center;
+
+}
+
+/*gives characteristics to the text "login"*/
+.link {
+    text-decoration: none;
+    color: #222228;
+    font-weight: 600;
+}
+
+/*gives characteristics to the text "login"*/
+.link:hover {
+    color: cadetblue;
+}
+
+.rol1 {
+    margin: 20px auto 40px auto;
+    border: 1px solid #a2a0a0;
+    height: 40px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+select {
+
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    height: 30px;
+    padding: 5px;
+    width: 450px;
+    color: rgb(116, 108, 108);
+
+}
+
+select:focus {
+    outline: none;
+}
+
+
+.rol1::after {
+    content: "\025be";
+    display: table-cell;
+    padding-top: 7px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background-color: #d9d9d9;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    pointer-events: none;
+}
+
+/*modifies the size of the page depending on the device*/
+@media (min-width: 768px) {
+    .formulario {
+        margin: auto;
+        width: 500px;
+        margin-top: 70px;
+        border-radius: 5%;
+    }
+}

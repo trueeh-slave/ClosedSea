@@ -1,0 +1,267 @@
+/*Styles for all html*/
+* {
+    margin: 0;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+/*Styles for body*/
+body {
+    font-family: sans-serif;
+    padding: 90px 20px 0;
+    background: #222228;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Nav logo style*/
+.favicon {
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: -29px;
+}
+
+/*Styles applied to the header*/
+.header {
+    background-color: #1c1c1f;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+}
+
+/*Styles applied to the nav*/
+.nav {
+    padding: 5px;
+    display: flex;
+    max-width: 1300px;
+    justify-content: space-between;
+    margin: 0 auto;
+
+}
+
+/*Styles applied to texts with links*/
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+/*Styles applied to the text ClosedSea*/
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+    left: -440px;
+    padding: 0 40px;
+    line-height: 80px;
+
+
+}
+
+/*Styles applied to the menu inside the nav*/
+.nav-menu {
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+}
+
+/*Styles applied to menu items*/
+.nav-menu-item {
+    font-size: 18px;
+    margin: 0 10px;
+    line-height: 80px;
+    text-transform: none;
+    width: max-content;
+}
+
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+/*Transition when hovering the mouse over menu items*/
+.nav-menu-link:hover {
+    background-color: #565454;
+    transition: 0.5s;
+}
+
+/* cierre de estilos nav*/
+
+/* Inicio estilos GunnerCat*/
+
+
+/*Imported Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+
+/*Styles generally applied to cards*/
+.cards {
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    max-width: 1200px;
+    margin-top: 90px;
+    overflow: hidden;
+}
+
+/*Background card 1*/
+.card--1 .card__img, .card--1 .card__img--hover {
+    *background-image: url(../Nfts/Cat1.png);
+}
+
+/*Background card 2*/
+.card--2 .card__img, .card--2 .card__img--hover {
+    background-image: url(../Nfts/Cat2.png);
+}
+
+/*Background card 3*/
+.card--3 .card__img, .card--3 .card__img--hover {
+    background-image: url(../Nfts/Cat3.png);
+}
+
+/*Style for like incon*/
+.card__like {
+    width: 18px;
+}
+
+/*Image inside to the cards*/
+.card__img {
+    visibility: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 235px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+
+}
+
+/*Transmitting information from the charts*/
+.card__info-hover {
+    position: absolute;
+    padding: 16px;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+}
+
+/*Image transition on mouse over*/
+.card__img--hover {
+    transition: 0.2s all ease-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: absolute;
+    height: 235px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    top: 0;
+
+}
+
+/*Styles applied to a chart element*/
+.card {
+    margin-right: 25px;
+    transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-color: #fff;
+    width: 33.3%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+
+}
+
+/*Transition when hovering the mouse over the chart*/
+.card:hover {
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.10, 1.10);
+}
+
+/*Styles applied to letter information*/
+.card__info {
+    z-index: 2;
+    background-color: #fff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 16px 24px 24px 24px;
+}
+
+/*Styles applied to the category chart*/
+.card__category {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #868686;
+}
+
+/*Styles applied to a card title*/
+.card__title {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+
+/*Styles applied to a by word*/
+.card__by {
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+/*Styles applied to author card*/
+.card__author {
+    font-weight: 600;
+    text-decoration: none;
+    color: #AD7D52;
+}
+
+/*Image transition of a card*/
+.card:hover .card__img--hover {
+    height: 100%;
+    opacity: 0.3;
+}
+
+/*effect of the information in a letter*/
+.card:hover .card__info {
+    background-color: transparent;
+    position: relative;
+}
+
+/*Styles applied to hover effect*/
+.card:hover .card__info-hover {
+    opacity: 1;
+}
+
+/*Styles applied to a button*/
+.btn {
+    border-radius: 6px;
+    padding: auto;
+    margin-left: 6px;
+    text-decoration: none;
+    background-color: antiquewhite;
+    text-align: center;
+    cursor: pointer;
+
+}

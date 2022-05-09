@@ -1,0 +1,225 @@
+/*text color*/
+:root {
+    --colorTextos: #49454567;
+}
+
+/*panel creation*/
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*shapes the body of the window*/
+body {
+    font-family: 'Roboto';
+    background: #222228;
+    background: -webkit-linear-gradient(to right, #313131, #222228);
+    background: linear-gradient(to right, #313131, #222228);
+    height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*form to titles*/
+h1 {
+    text-align: center;
+    font-weight: 700;
+}
+
+/*shapes the panel where the buttons and text are*/
+form {
+    background: #fff;
+    padding: 40px 0;
+    box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin-top: 160px;
+
+}
+
+/*shapes the panel where the buttons and text are*/
+.form {
+    width: 100%;
+    margin: auto;
+
+}
+
+/*gives margin and size to the form*/
+form .grupo {
+    position: relative;
+    margin: 45px;
+}
+
+/*shape text boxes*/
+input {
+    background: none;
+    color: #c6c6c6;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--colorTextos);
+}
+
+/*remove margins from text boxes*/
+input:focus {
+    outline: none;
+    color: #5e5d5d;
+}
+
+/*Create the animations to the text boxes*/
+label {
+    color: var(--colorTextos);
+    font-size: 16px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    transition: 0.5s ease all;
+    pointer-events: none;
+}
+
+/*Gives characteristics to text boxes*/
+input:focus ~ label,
+input:valid ~ label {
+    top: -14px;
+    font-size: 12px;
+    color: #2148f3;
+}
+
+/*Gives characteristics to the bars*/
+.barra {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+/*Gives characteristics to the bars*/
+.barra::before {
+    content: "";
+    height: 2px;
+    width: 0%;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to right, #504f4f, #222228);
+    transition: 0.3s ease width;
+    left: 0;
+}
+
+/*Gives characteristics to the bars*/
+input:focus ~ .barra::before {
+    width: 100%;
+}
+
+/*Gives all the features to the buttons*/
+button {
+    font-family: 'roboto';
+    background: #222228;
+    background: -webkit-linear-gradient(to right, #5e5d5d, #212183);
+    background: linear-gradient(to right, #5e5d5d, #212183);
+    border: none;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    color: #fff;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+
+}
+
+/*shapes the icons*/
+.favicon {
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 20px;
+}
+
+/*style the entire header*/
+.header {
+    background-color: #1c1c1f;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/*styles the entire nav*/
+.nav {
+    padding: 5px;
+    display: flex;
+    max-width: 1300px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+/*create animations for the nav*/
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*create styles for the logo text*/
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    padding: 0 40px;
+    line-height: 80px;
+    margin-left: -1600px;
+}
+
+/*shapes the user logo*/
+.nav-avatar {
+    margin-top: 15px;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    left: 415px;
+    top: 10px;
+}
+
+/*Style the navigation bar*/
+.nav-menu {
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+
+}
+
+/*Style the navigation bar*/
+.nav-menu-item {
+    font-size: 18px;
+    margin: 0 10px;
+    line-height: 80px;
+    text-transform: none;
+    width: max-content;
+}
+
+/*Style the navigation bar*/
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+/*Style the navigation bar*/
+.nav-menu-link:hover {
+    background-color: #565454;
+    transition: 0.5s;
+}
+
+/*modifies the size of the page depending on the device*/
+@media screen and (max-width: 500px) {
+    form {
+        width: 80%;
+    }
+}
+

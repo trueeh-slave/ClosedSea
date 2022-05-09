@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Declaration of language and apis to be used in html -->
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ClosedSea</title>
+        <link rel="stylesheet" href="css/wallet.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="header">
+            <!--NavBar declaration and functions-->
+            <nav class="nav">
+                <!-- Navbar logo and avatar logo --->
+                <img src="./Resources/closedsea%20favicon.png" class="favicon">
+                <img src="./Resources/UserAvatar.png" class="nav-avatar">
+                <!-- Navbar text logo --->
+                <a href="indexLOG.jsp" class="logo nav-link">ClosedSea</a>
+                <!-- Navbar made with an ordered list and within that list an unordered list --->
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a href="explore.html" class="nav-menu-link nav-link">Explore</a>
+                    </li>
+                    <!-- <li class="nav-menu-item ">
+                         <a href="#" class="nav-menu-link nav-link">Create</a>
+                     </li> -->
+                    <li class="nav-menu-item nav-menu-login">
+                        <a href="#" class="nav-menu-link nav-link">trueeh</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Form to get the wallet information -->
+        <form action="./Wallet" method="post">
+            <div class="form">
+                <!-- Wallet title -->
+                <h1>Wallet</h1>
+                <!-- Owners name input -->
+                <div class="grupo">
+                    <input type="text" name="username" required><span class="barra"></span>
+                    <label>Nombre de usuario</label>
+                </div>
+                <div class="grupo">
+                    <input type="text" name="" required><span class="barra"></span>
+                    <label>Nombre del titular</label>
+                </div>
+                <!-- Card number  input -->
+                <div class="grupo">
+                    <input type="text" name="" id="Numero" required><span class="barra"></span>
+                    <label>Número de tarjeta</label>
+                </div>
+                <!-- Expiration date input -->
+                <div class="grupo">
+                    <input type="date" required><span class="barra"></span>
+                </div>
+                <!-- CVV input -->
+                <div class="grupo">
+                    <input type="text" required><span class="barra"></span>
+                    <label>Código de la tarjeta (CVV)</label>
+                </div>
+                <!-- Cantidad input -->
+                <div class="grupo">
+                    <input type="text" name="coins" required><span class="barra"></span>
+                    <label>Cantidad a recargar</label>
+                </div>
+                <!-- Pay button -->
+                <button type="submit">Pagar</button>
+            </div>
+        </form>
+    </body>
+</html>

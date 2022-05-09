@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- Declaration of language and apis to be used in html -->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ClosedSea</title>
+        <link rel="stylesheet" href="css/register.css">
+        <script src="https://kit.fontawesome.com/5cd98f5e5b.js" crossorigin="anonymous"></script>
+    </head>
+    <!-- Body declaration -->
+    <body>
+        <!-- header-->
+
+        <header class="header">
+            <!--NavBar declaration and functions-->
+            <nav class="nav">
+                <!-- Navbar logo --->
+                <img src="./Resources/closedsea%20favicon.png" class="favicon">
+                <!-- Navbar text logo --->
+                <a href="index.html" class="logo nav-link">ClosedSea</a>
+                <!-- Navbar made with an ordered list and within that list an unordered list --->
+            </nav>
+        </header>
+        <!-- Form for get the register information-->
+        <form class="formulario" id="create-user-form">
+            <h1>Registrarse</h1>
+            <div class="contenedor ">
+                <!-- div with the name input information -->
+                <div class="input-contenedor">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                    <input type="text" id="username" placeholder="Nombre Completo" required>
+                </div>
+                <!-- div with the password input information -->
+                <div class="input-contenedor">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+
+                <div class="rol1">
+                    <select id="role" required>
+                        <option value="artista" name="artista">Artista</option>
+                        <option value="comprador" name="comprador">Comprador</option>
+                    </select>
+                </div>
+
+                <!-- button connected to login.html page -->
+                <input type="submit" value="Registrate" class="button">
+                <!-- button connected to login.html page -->
+                <p>Si te registras estarías aceptando nuestras condiciones de uso y politica de privacidad </p>
+                <p>¿Ya tienes cuenta? <a class="link" href="login.html">Iniciar Sesion</a></p>
+            </div>
+        </form>
+
+        <script>
+            let createUserForm = document.getElementById("create-user-form");
+
+            createUserForm.onsubmit = async (e) => {
+                e.preventDefault();
+                let data = {
+                    "username": document.getElementById("username").value,
+                    "password": document.getElementById("password").value,
+                    "role": document.getElementById("role").value,
+                };
+
+                let response = await fetch("./api/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                let message = await response.json();
+                alert(message);
+
+                sessionStorage.setItem("username", data.username);
+                sessionStorage.setItem("password", data.password);
+                sessionStorage.setItem("role", data.role);
+
+                // redireccion al index
+                    window.location.href = "./indexComprador.html";
+            }
+        </script>
+    </body>
+</html>
