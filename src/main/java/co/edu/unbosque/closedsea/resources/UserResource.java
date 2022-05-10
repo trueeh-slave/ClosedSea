@@ -46,18 +46,6 @@ public class UserResource {
         }
     }
 
-    /*    @GET
-        @Produces(MediaType.APPLICATION_JSON)
-        @Path("/{username}")
-        public User getUserByUsername(@PathParam("username") String username) {
-            try {
-                List<User> users = getUsers();
-                return users.stream().filter(userFound -> userFound.getUsername().equals(username)).findFirst().orElse(null);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }*/
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{username}")
@@ -65,16 +53,9 @@ public class UserResource {
         try {
             List<User> users = getUsers();
             User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
-
-//            if (user != null) {
             return Response.ok().entity(user).build();
-//            } else {
-//                return Response
-//                return Response.status(404).entity("User not found").build();
-//            }
         } catch (IOException e) {
             return Response.serverError().build();
         }
     }
-
 }
