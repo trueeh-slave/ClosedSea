@@ -1,10 +1,9 @@
-package co.edu.unbosque.testingproject.resources;
+package co.edu.unbosque.closedsea.resources;
 
-import co.edu.unbosque.testingproject.dto.Nft;
-import co.edu.unbosque.testingproject.dto.User;
-import co.edu.unbosque.testingproject.services.NftService;
-import co.edu.unbosque.testingproject.services.UserService;
-import jakarta.servlet.Servlet;
+import co.edu.unbosque.closedsea.dto.Nft;
+import co.edu.unbosque.closedsea.dto.User;
+import co.edu.unbosque.closedsea.services.NftService;
+import co.edu.unbosque.closedsea.services.UserService;
 import jakarta.servlet.ServletContext;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static co.edu.unbosque.testingproject.services.UserService.getUsers;
+import static co.edu.unbosque.closedsea.services.UserService.getUsers;
 
 @Path("/users/{username}/collections/{collection}/nfts")
 public class NftResource {

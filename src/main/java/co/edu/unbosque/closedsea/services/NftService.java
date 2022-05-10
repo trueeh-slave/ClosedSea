@@ -1,6 +1,6 @@
-package co.edu.unbosque.testingproject.services;
+package co.edu.unbosque.closedsea.services;
 
-import co.edu.unbosque.testingproject.dto.Nft;
+import co.edu.unbosque.closedsea.dto.Nft;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;

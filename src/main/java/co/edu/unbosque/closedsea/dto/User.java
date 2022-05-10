@@ -1,4 +1,4 @@
-package co.edu.unbosque.testingproject.dto;
+package co.edu.unbosque.closedsea.dto;
 
 import com.opencsv.bean.CsvBindByName;
 
@@ -16,8 +16,7 @@ public class User {
     @CsvBindByName
     private String coins;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String password, String role, String coins) {
         this.username = username;

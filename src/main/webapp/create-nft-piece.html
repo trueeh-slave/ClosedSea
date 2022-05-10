@@ -67,24 +67,24 @@
                 </a>
             </div>
         </form>
-    <script>
-        document.getElementById("author").value=localStorage.getItem("username");
+        <script>
+            document.getElementById("author").value = localStorage.getItem("username");
 
-        const form = document.getElementById("form");
-        uploadNft = async (e) => {
-            e.preventDefault()
+            const form = document.getElementById("form");
+            uploadNft = async (e) => {
+                e.preventDefault()
 
-            let author = document.getElementById("author").value;
-            //agregar "ley collection" cuando este el sistema de colecciones
-            const response = await fetch(`./api/users/${author}/collections/${collection}/nfts`,{
-                method: 'POST',
-                body: new FormData(form)
-            });
+                let author = document.getElementById("author").value;
+                //agregar "ley collection" cuando este el sistema de colecciones
+                const response = await fetch(`./api/users/${author}/collections/${collection}/nfts`, {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
 
-            window.location.href = "./indexComprador.html"
-        }
-        form.addEventListener("submit", uploadNft)
-    </script>
+                window.location.href = "./indexComprador.html"
+            }
+            form.addEventListener("submit", uploadNft)
+        </script>
         <script>
             //Agregar divs con javascript
         </script>

@@ -50,26 +50,54 @@
                 <p>¿No tienes una cuenta? <a class="link" href="register.html">Registrate</a></p>
             </div>
         </form>
-    <script>
-        formElem.onsubmit = async (e) => {
-            e.preventDefault();
 
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let role = document.getElementById("role").value;
+        <script>
+            let form = document.getElementById("log-in-form");
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                let data = {
+                    "username": document.getElementById("username").value,
+                    "password": document.getElementById("password").value,
+                    "role": document.getElementById("role").value
+                }
 
-            let response = await fetch(`./api/users/${user}?=${role}`);
-            let result = await response.json();
+                let response = await fetch("./api/users/" + data.username);
+                let result = await response.json();
 
-            if(username==result.username && password==result.password && role==result.role){
-                localStorage.setItem("username",username)
-                window.location.href = "./indexComprador.html"
+                if (result != null) {
+                    sessionStorage.setItem("username", result.username);
+                    sessionStorage.setItem("coins", result.coins);
+                    window.location.href = "./indexComprador.html"
+                }
             }
+        </script>
 
-        }
+        <!--        <script>
+                    let form = document.getElementById("log-in-form");
 
+                    form.onsubmit = async (e) => {
+                        e.preventDefault();
+                        let data = {
+                            "username": document.getElementById("username").value,
+                            "password": document.getElementById("password").value,
+                            "role": document.getElementById("role").value,
+                        };
 
-    </script>
+                        let response = await fetch("./api/users/" + username, {
+                            method: "GET",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            // body: JSON.stringify(data)
+                        });
 
+                        console.log(response);
+
+                        sessionStorage.setItem("username", data.username);
+                        sessionStorage.setItem("coins", data.coins);
+                        // let user = await response.json();
+                        // alert(user);
+                    }
+                </script>-->
     </body>
 </html>

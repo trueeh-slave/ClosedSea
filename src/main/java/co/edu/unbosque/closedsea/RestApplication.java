@@ -1,4 +1,4 @@
-package co.edu.unbosque.testingproject;
+package co.edu.unbosque.closedsea;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

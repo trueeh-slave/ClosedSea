@@ -1,4 +1,4 @@
-package co.edu.unbosque.testingproject.dto;
+package co.edu.unbosque.closedsea.dto;
 
 import com.opencsv.bean.CsvBindByName;
 

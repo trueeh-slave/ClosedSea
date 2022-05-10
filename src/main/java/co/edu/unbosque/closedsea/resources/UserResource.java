@@ -1,6 +1,6 @@
-package co.edu.unbosque.testingproject.resources;
+package co.edu.unbosque.closedsea.resources;
 
-import co.edu.unbosque.testingproject.dto.User;
+import co.edu.unbosque.closedsea.dto.User;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static co.edu.unbosque.testingproject.services.UserService.*;
+import static co.edu.unbosque.closedsea.services.UserService.*;
 
 @Path("/users")
 public class UserResource {
@@ -35,30 +35,29 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response create(User user) {
         String contextPath = context.getRealPath("") + File.separator;
         try {
-            user = createUser(user.getUsername(), user.getPassword(), user.getRole(), user.getCoins(), contextPath);
+            user = createUser(user.getUsername(), user.getPassword(), user.getRole(), contextPath);
             return Response.created(UriBuilder.fromResource(UserResource.class).path(user.getUsername()).build()).entity(user).build();
         } catch (IOException e) {
             return Response.serverError().build();
         }
     }
 
-/*    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{username}")
-    public User getUserByUsername(@PathParam("username") String username) {
-        try {
-            List<User> users = getUsers();
-            return users.stream().filter(userFound -> userFound.getUsername().equals(username)).findFirst().orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
-/*
+    /*    @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Path("/{username}")
+        public User getUserByUsername(@PathParam("username") String username) {
+            try {
+                List<User> users = getUsers();
+                return users.stream().filter(userFound -> userFound.getUsername().equals(username)).findFirst().orElse(null);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }*/
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{username}")
@@ -68,8 +67,6 @@ public class UserResource {
             User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
 
 //            if (user != null) {
-            var test = Response.ok().entity(user).build();
-            System.out.println("test = " + test);
             return Response.ok().entity(user).build();
 //            } else {
 //                return Response
@@ -78,6 +75,6 @@ public class UserResource {
         } catch (IOException e) {
             return Response.serverError().build();
         }
-    }*/
+    }
 
 }
