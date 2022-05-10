@@ -36,16 +36,16 @@ public class UserService {
         return new User(username, password, role, coins);
     }
 
-    public static Optional<List<Nft>> getUserNfts() throws IOException{
+    public static Optional<List<Nft>> getUserNfts() throws IOException {
         List<Nft> nfts;
-        try(InputStream inputStream = UserService.class.getClassLoader().getResourceAsStream("pieces.csv")){
-            if(inputStream == null){
+        try (InputStream inputStream = UserService.class.getClassLoader().getResourceAsStream("pieces.csv")) {
+            if (inputStream == null) {
                 return Optional.empty();
             }
             HeaderColumnNameMappingStrategy<Nft> strategy = new HeaderColumnNameMappingStrategy<>();
             strategy.setType(Nft.class);
             //Buffered reader try catch
-            try(BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))){
+            try (BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 CsvToBean<Nft> csvToBean = new CsvToBeanBuilder<Nft>(bf).withType(Nft.class).withMappingStrategy(strategy).withIgnoreLeadingWhiteSpace(true).build();
                 nfts = csvToBean.parse();
             }
