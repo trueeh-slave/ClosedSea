@@ -35,7 +35,7 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response create(User user) {
         String contextPath = context.getRealPath("") + File.separator;
         try {

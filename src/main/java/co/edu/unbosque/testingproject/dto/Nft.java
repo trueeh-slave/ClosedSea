@@ -15,6 +15,9 @@ public class Nft {
     @CsvBindByName
     private String path;
 
+    @CsvBindByName
+    private String collectionName;
+
     public Nft(String title, String author, String coins, String path) {
         this.title = title;
         this.author = author;

@@ -1,16 +1,16 @@
 package co.edu.unbosque.testingproject.services;
 
+import co.edu.unbosque.testingproject.dto.Nft;
 import co.edu.unbosque.testingproject.dto.User;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.BufferOverflowException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
 
@@ -34,5 +34,22 @@ public class UserService {
         outputStream.write(newLine.getBytes());
         outputStream.close();
         return new User(username, password, role, coins);
+    }
+
+    public static Optional<List<Nft>> getUserNfts() throws IOException{
+        List<Nft> nfts;
+        try(InputStream inputStream = UserService.class.getClassLoader().getResourceAsStream("pieces.csv")){
+            if(inputStream == null){
+                return Optional.empty();
+            }
+            HeaderColumnNameMappingStrategy<Nft> strategy = new HeaderColumnNameMappingStrategy<>();
+            strategy.setType(Nft.class);
+            //Buffered reader try catch
+            try(BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))){
+                CsvToBean<Nft> csvToBean = new CsvToBeanBuilder<Nft>(bf).withType(Nft.class).withMappingStrategy(strategy).withIgnoreLeadingWhiteSpace(true).build();
+                nfts = csvToBean.parse();
+            }
+        }
+        return Optional.of(nfts);
     }
 }
