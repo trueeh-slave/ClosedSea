@@ -15,22 +15,59 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static co.edu.unbosque.closedsea.services.UserService.getUsers;
+//import static co.edu.unbosque.closedsea.services.UserService.getUsers;
 
 @Path("/users/{username}/collections/{collection}/nfts")
 public class NftResource {
-
 
     @Context
     ServletContext context;
     private String UPLOAD_DIRECTORY = "uploads";
 
+    static final String JDBC_DRIVER = "org.postgresql.Driver";
+    static final String DB_URL = "jdbc:postgresql://localhost/ClosedSea";
+    static final String USER = "postgres";
+    static final String PASS = "68218190";
+
     @GET
+    @Produces("application/json")
+    public Response listNfts()
+    {
+        Connection conn = null;
+        List<User> users = null;
+
+        try {
+
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            UserService usersService = new UserService(conn);
+            usersService.listUsers();
+
+            conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace(); //
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace(); //
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return Response.ok().entity(users).build();
+    }
+
+   /* @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserFiles(@PathParam("username") String username, @PathParam("collection") String collection) {
         UserService userService = new UserService();
@@ -41,7 +78,7 @@ public class NftResource {
             nftList = userService.getUserNfts();
 
             for (Nft nft : nftList.get()) {
-                if (nft.getAuthor().equals(username) /*Agregar lugar para las colecciones*/) {
+                if (nft.getAuthor().equals(username) *//*Agregar lugar para las colecciones*//*) {
                     nft.setPath(UPLOAD_DIRECTORY + File.separator + nft.getPath());
                     nfts.add(nft);
                 }
@@ -52,9 +89,9 @@ public class NftResource {
             e.printStackTrace();
             return Response.serverError().build();
         }
-    }
+    }*/
 
-    @POST
+   /* @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
 
@@ -89,7 +126,7 @@ public class NftResource {
             return Response.serverError().build();
         }
         return Response.status(201).entity("Paso el nft").build();
-    }
+    }*/
 
     public void saveImage(InputStream uplInputStream, String filename, ServletContext context) {
         int readBytes = 0;
