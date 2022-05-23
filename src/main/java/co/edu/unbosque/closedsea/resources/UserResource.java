@@ -42,7 +42,7 @@ public class UserResource {
 
             UserService usersService = new UserService(conn);
 
-            users = usersService.listUsers();
+            //users = usersService.listUsers();
             users = usersService.getUsers();
 
             conn.close();

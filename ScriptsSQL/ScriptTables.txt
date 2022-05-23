@@ -1,0 +1,83 @@
+
+-----------------------------------TABLAS FINALES------------------------------------
+
+
+CREATE TABLE user_table(
+	
+	id_user SERIAL,
+	user_name VARCHAR(40) NOT NULL,
+	user_password INT NOT NULL,
+	user_email VARCHAR(30) NOT NULL,
+	user_role VARCHAR(10) NOT NULL,
+	user_fcoins INT,
+	
+	PRIMARY KEY(id_user)
+);
+
+CREATE TABLE collection (
+	
+	id_collection SERIAL,
+	collection_name VARCHAR(30) NOT NULL,
+	collection_image VARCHAR(50) NOT NULL,
+	collection_category VARCHAR(20) NOT NULL,
+	collection_author INT NOT NULL,
+	
+	PRIMARY KEY(id_collection),
+	FOREIGN KEY(collection_author)
+		REFERENCES user_table(id_user)
+);
+
+CREATE TABLE piece (
+
+	id_piece SERIAL, 
+	piece_name VARCHAR(30) NOT NULL,
+	piece_author INT NOT NULL,
+	piece_price int NOT NULL,
+	piece_image VARCHAR(50) NOT NULL,
+	piece_category INT NOT NULL,
+	
+	PRIMARY KEY(id_piece),
+	FOREIGN KEY(piece_author)
+		REFERENCES user_table (id_user),
+	FOREIGN KEY (piece_category)
+		REFERENCES collection (id_collection)
+);
+
+CREATE TABLE like_table(
+	
+	date_like VARCHAR(30) NOT NULL,
+	user_like int NOT NULL,
+	piece_like int NOT NULL,
+	
+	PRIMARY KEY(user_like, piece_like),
+	FOREIGN KEY(user_like)
+		REFERENCES user_table(id_user),
+	FOREIGN KEY(piece_like)
+		REFERENCES piece(id_piece)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

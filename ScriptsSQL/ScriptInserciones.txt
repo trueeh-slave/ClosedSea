@@ -1,0 +1,62 @@
+//Inserción tabla user_table
+
+INSERT INTO user_table 
+(user_name, user_password, user_email, user_role, user_fcoins) VALUES 
+('Oscar','456','oscar@unbosque.edu.co','artista','0'),
+('Nelson','123','nelson@unbosque.edu.co','comprador','0'),
+('Tomas','899','tomas@unbosque.edu.co','comprador','0'),
+('Nicolas','321','nicolas@unbosque.edu.co','artista','0'),
+('Matias','159','matias@gmail.com','comprador','0'),
+('Laura','189','laura@gmail.com','artista','0'),
+('Mixwell','951','mixwell@hotmail.com','comprador','0'),
+('Gabriela','753','gabriela@gmail.com','artista','0'),
+('Andres','183','andres@gmail.com','comprador','0'),
+('Jeanpier','671','jeanpier@gmail.com','artista','0');
+
+
+//Inserción tabla collection
+
+select * from collection c, user_table u where c.collection_author = u.id_user;
+
+INSERT INTO collection 
+(collection_name, collection_image, collection_category, collection_author) VALUES 
+('dogs','url1','dogs_nfts','1'),
+('dogs','url2','dogs_nfts','1'),
+('cats','url1','cats_nfts','4'),
+('cats','url2','cats_nfts','4'),
+('pigeon','url1','pigeon_nfts','8'),
+('pigeon','url2','pigeon_nfts','8'),
+('wolve','url1','wolve_nfts','10'),
+('wolve','url2','wolve_nfts','10');
+
+//Inserción tabla piece 
+
+select * from collection c, user_table u, piece p where p.piece_author = u.id_user AND p.piece_category = c.id_collection;
+select * from piece;
+
+insert into piece 
+(piece_name, piece_author, piece_price, piece_image, piece_category) values
+
+('newdog','1','1000','url1','1'),
+('newcat','4','5000','url1','3'),
+('newpigeon','8','3000','url1','6'),
+('newwolve','10','7000','url1','7'),
+('newdog','1','1520','url2','1'),
+('newcat','4','1684','url2','3'),
+('newpigeon','8','4684','url2','6');
+
+//Inserción tabla lie_table 
+
+select id_user, id_piece, date_like, user_like, piece_like from 
+user_table u, piece p, like_table l where l.user_like = u.id_user and p.id_piece = l.piece_like;
+
+select * from like_table;
+
+insert into like_table 
+(date_like, user_like, piece_like) values 
+
+('15/08/22','1','3'),
+('16/06/22','3','7'),
+('19/08/22','8','1'),
+('22/08/22','5','2'),
+('15/08/22','4','4');
