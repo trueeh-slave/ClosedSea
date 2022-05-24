@@ -1,12 +1,17 @@
 package co.edu.unbosque.closedsea.services;
 
 import co.edu.unbosque.closedsea.dto.Collection;
+import co.edu.unbosque.closedsea.dto.User;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CollectionService {
+
+    private static Connection conn;
+
+    public CollectionService(Connection conn) {
+        this.conn = conn;
+    }
 
     public List<Collection> getLastCollections() throws IOException {
         List<Collection> collectionsList;
@@ -67,6 +78,50 @@ public class CollectionService {
             os.close();
 
         return new Collection(username,collectionName,size);
+    }
+
+
+    public static List<Collection> listCollections() {
+        // Object for handling SQL statement
+        Statement stmt = null;
+
+        // Data structure to map results from database
+        List<Collection> collections = new ArrayList<Collection>();
+
+        try {
+            // Executing a SQL query
+            System.out.println("=> Lista de colecciones...");
+            stmt = conn.createStatement();
+            String sql = "SELECT collection_author, collection_name, collection_category  FROM collection";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Reading data from result set row by row
+            while (rs.next()) {
+                // Extracting row values by column name
+
+                String collection_author = rs.getString("collection_author");
+                String collection_name = rs.getString("collection_name");
+                String collection_category = rs.getString("collection_category");
+
+
+                // Creating a new UserApp class instance and adding it to the array list
+                collections.add(new Collection(collection_author, collection_name, collection_category));
+            }
+
+            // Closing resources
+            rs.close();
+            stmt.close();
+        } catch (SQLException se) {
+            se.printStackTrace(); // Handling errors from database
+        } finally {
+            // Cleaning-up environment
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return collections;
     }
 
 }

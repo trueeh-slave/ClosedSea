@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 @Path("/users/{username}/colletions")
@@ -17,10 +18,12 @@ public class ArtistCollectionResource {
     @Context
     ServletContext context;
 
-    @GET
+    Connection conn = null;
+
+      @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCollections(@PathParam("username") String username) throws IOException {
-        CollectionService collectionService = new CollectionService();
+        CollectionService collectionService = new CollectionService(conn);
         List<Collection> collections = collectionService.getCollectionByUsername(username);
 
         return Response.ok().entity(collections).build();
@@ -33,7 +36,7 @@ public class ArtistCollectionResource {
         String contextPath = context.getRealPath("") + File.separator;
 
         try{
-            Collection collection1 = new CollectionService().createCollection(username,collection,"0",contextPath);
+            Collection collection1 = new CollectionService(conn).createCollection(username,collection,"0",contextPath);
             return Response.ok().entity(collection1).build();
         } catch (IOException e){
             return Response.serverError().build();
@@ -45,7 +48,7 @@ public class ArtistCollectionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCollectionPath(@PathParam("username") String username, @PathParam("collection") String collection){
         try{
-            CollectionService collectionService = new CollectionService();
+            CollectionService collectionService = new CollectionService(conn);
             List<Collection> collections = collectionService.getCollectionByUsername(username);
 
             Collection collection1 = collections.stream().filter(u -> u.getCollectionName().equals(collection)).findFirst().orElse(null);

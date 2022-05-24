@@ -11,12 +11,15 @@ public class Collection {
     private String collectionName;
 
     @CsvBindByName
-    private String nftAmount;
+    //private String nftAmount;
+    private String collectionCategory;
 
-    public Collection(String username, String collectionName, String nftAmount) {
+
+    public Collection(String username, String collectionName, String nftCategory) {
         this.username = username;
         this.collectionName = collectionName;
-        this.nftAmount = nftAmount;
+        this.collectionCategory = collectionCategory;
+        //this.nftAmount = nftAmount;
     }
 
     public String getUsername() {
@@ -35,11 +38,11 @@ public class Collection {
         this.collectionName = collectionName;
     }
 
-    public String getNftAmount() {
-        return nftAmount;
+    public String getCollectionCategory() {
+        return collectionCategory;
     }
 
-    public void setNftAmount(String nftAmount) {
-        this.nftAmount = nftAmount;
+    public void setCollectionCategory(String collectionCategory) {
+        this.collectionCategory = collectionCategory;
     }
 }
