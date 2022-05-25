@@ -119,4 +119,46 @@ public class UserResource {
         }
         return Response.ok().entity(user).build();
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response createUser(
+            @FormParam("username") String username,
+            @FormParam("password") String password,
+            @FormParam("role") String role
+
+    ) {
+        Connection conn = null;
+        List<User> users = null;
+        User user = null;
+
+        try {
+
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            UserService usersService = new UserService(conn);
+
+            user = new User(username, password, role, "0");
+            usersService.newUser(user);
+
+            conn.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return Response.created(UriBuilder.fromResource(UserResource.class).path(username).build())
+                .entity(user)
+                .build();
+    }
+
+
 }

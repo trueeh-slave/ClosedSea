@@ -8,10 +8,7 @@ import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -154,5 +151,43 @@ public class UserService {
             }
         }
         return users;
+    }
+
+    public User newUser(User user) {
+        // Object for handling SQL statement
+        PreparedStatement stmt = null;
+
+        // Data structure to map results from database
+        if (user != null) {
+
+            try {
+
+                if (user.getRole().equals("artista")) {
+                    stmt = this.conn.prepareStatement("insert into user_table (username, user_password, user_role, user_fcois ) \n" +
+                            "VALUES (?,?,'artista','0')");
+                } else if (user.getRole().equals("comprador")) {
+                    stmt = this.conn.prepareStatement("insert into user_table (username, user_password, user_role, user_fcois )\n" +
+                            "VALUES (?,?,'comprador','0')");
+                }
+                stmt.setString(1, user.getUsername());
+                stmt.setString(2, user.getPassword());
+
+
+                stmt.executeUpdate();
+                stmt.close();
+            } catch (SQLException se) {
+                se.printStackTrace(); // Handling errors from database
+            } finally {
+                // Cleaning-up environment
+                try {
+                    if (stmt != null) stmt.close();
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                }
+            }
+            return user;
+        } else {
+            return null;
+        }
     }
 }

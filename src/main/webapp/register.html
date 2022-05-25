@@ -67,9 +67,11 @@
                 let response = await fetch("./api/users", {
                     method: "POST",
                     headers: {
-                        "Content-type": "application/json"
+                        //"Content-type": "application/json"
+                        "Content-type": "application/x-www-form-urlencoded",
                     },
-                    body: JSON.stringify(data)
+                    //body: JSON.stringify(data),
+                    body: new URLSearchParams(data),
                 });
 
                 let message = await response.json();
