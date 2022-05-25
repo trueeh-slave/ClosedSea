@@ -151,15 +151,25 @@ public class CollectionService {
         }
     }
 
-    public Collection getCollection(String username, String collection){
+    public Collection getCollection(String username, String category, String collection){
         PreparedStatement stmt = null;
         Collection collectionobj = null;
-/*
         try{
-            //stmt;
+            stmt = this.conn.prepareStatement("SELECT * FROM collection WHERE collection_name = ? and collection_category = ? and collection_author = ?");
+            stmt.setString(1, collection);
+            stmt.setString(2, category);
+            stmt.setString(3, username);
+            ResultSet rs = stmt.executeQuery();
+
+            rs.next();
+
+            collectionobj = new Collection(rs.getString("collection_author"), rs.getString("collection_name"), rs.getString("collection_category"));
+            rs.close();
+            stmt.close();
+
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         return collectionobj;
     }
 

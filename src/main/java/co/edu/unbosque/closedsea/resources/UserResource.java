@@ -91,7 +91,7 @@ public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{username}")
-    public Response get(@PathParam("username") String username) {
+    public Response get(@PathParam("username") String username, @FormParam("password") String password) {
         Connection conn = null;
         User user = null;
         try {
@@ -99,9 +99,9 @@ public class UserResource {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            UserService usersService = new UserService(conn);
+            new UserService(conn);
             List<User> users = getUsers();
-             user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
+            user = users.stream().filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst().orElse(null);
 
             conn.close();
         } catch (IOException e) {
