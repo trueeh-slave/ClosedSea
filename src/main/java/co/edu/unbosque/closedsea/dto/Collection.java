@@ -14,12 +14,10 @@ public class Collection {
     //private String nftAmount;
     private String collectionCategory;
 
-
-    public Collection(String username, String collectionName, String nftCategory) {
+    public Collection(String username, String collectionName, String collectionCategory) {
         this.username = username;
         this.collectionName = collectionName;
         this.collectionCategory = collectionCategory;
-        //this.nftAmount = nftAmount;
     }
 
     public String getUsername() {

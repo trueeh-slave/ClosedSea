@@ -8,10 +8,7 @@ import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +23,7 @@ public class CollectionService {
         this.conn = conn;
     }
 
-    public List<Collection> getLastCollections() throws IOException {
+/*    public List<Collection> getLastCollections() throws IOException {
         List<Collection> collectionsList;
         List<Collection> response = new ArrayList<>();
 
@@ -78,7 +75,7 @@ public class CollectionService {
             os.close();
 
         return new Collection(username,collectionName,size);
-    }
+    }*/
 
 
     public static List<Collection> listCollections() {
@@ -122,6 +119,48 @@ public class CollectionService {
             }
         }
         return collections;
+    }
+
+    public Collection createCollection(Collection collection) throws SQLException {
+        PreparedStatement stmt = null;
+
+        if(collection != null){
+            try{
+                stmt = this.conn.prepareStatement("insert into collection (collection_name, collection_category, collection_author)\n" + "values(?,?,?)");
+
+                stmt.setString(1,collection.getCollectionName());
+                stmt.setString(2,collection.getCollectionCategory());
+                stmt.setString(3,collection.getUsername());
+
+                stmt.executeUpdate();
+                stmt.close();
+
+            } catch(SQLException se){
+                se.printStackTrace();
+            } finally{
+                try {
+                    if (stmt != null) stmt.close();
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                }
+            }
+            return collection;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Collection getCollection(String username, String collection){
+        PreparedStatement stmt = null;
+        Collection collectionobj = null;
+/*
+        try{
+            //stmt;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        return collectionobj;
     }
 
 }
