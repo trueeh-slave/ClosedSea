@@ -167,8 +167,16 @@ public class CollectionService {
             rs.close();
             stmt.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try{
+                if (stmt != null ){
+                    stmt.close();
+                }
+            } catch (SQLException se){
+                se.printStackTrace();
+            }
         }
         return collectionobj;
     }
