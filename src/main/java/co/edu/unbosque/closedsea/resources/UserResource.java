@@ -91,7 +91,7 @@ public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{username}")
-    public Response get(@PathParam("username") String username, @FormParam("password") String password) {
+    public Response get(@PathParam("username") String username) {
         Connection conn = null;
         User user = null;
         try {
@@ -101,16 +101,14 @@ public class UserResource {
 
             new UserService(conn);
             List<User> users = getUsers();
-            user = users.stream().filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst().orElse(null);
+            user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
 
             conn.close();
         } catch (IOException e) {
             return Response.serverError().build();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (conn != null) conn.close();
             } catch (SQLException se) {
@@ -144,10 +142,8 @@ public class UserResource {
             usersService.newUser(user);
 
             conn.close();
-        } catch (SQLException se) {
+        } catch (SQLException | ClassNotFoundException se) {
             se.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (conn != null) conn.close();
@@ -159,6 +155,4 @@ public class UserResource {
                 .entity(user)
                 .build();
     }
-
-
 }
