@@ -8,6 +8,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
 import org.apache.james.mime4j.dom.Multipart;
 import org.jboss.resteasy.core.ServerResponse;
@@ -67,29 +68,50 @@ public class NftResource {
         return Response.ok().entity(users).build();
     }
 
-   /* @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserFiles(@PathParam("username") String username, @PathParam("collection") String collection) {
-        UserService userService = new UserService();
-        Optional<List<Nft>> nftList = null;
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response uploadImage (MultipartFormDataInput input){
+        Connection conn = null;
+        try{
+            String author = input.getFormDataPart("author", String.class, null);
+            String collection = input.getFormDataPart("collection", String.class, null);
+            String title = input.getFormDataPart("title", String.class, null);
+            String price = input.getFormDataPart("price", String.class, null);
 
-        try {
-            List<Nft> nfts = new ArrayList<Nft>();
-            nftList = userService.getUserNfts();
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            for (Nft nft : nftList.get()) {
-                if (nft.getAuthor().equals(username) *//*Agregar lugar para las colecciones*//*) {
-                    nft.setPath(UPLOAD_DIRECTORY + File.separator + nft.getPath());
-                    nfts.add(nft);
+            UserService userService= new UserService(conn);
+            User user = userService.getUser(author);
+            String authorReal = user.getUsername();
+
+            NftService nftService = new NftService(conn);
+
+            Map<String, List<InputPart>> formParts = input.getFormDataMap();
+            List<InputPart> inputParts = formParts.get("customfile");
+
+            for(InputPart inputPart : inputParts){
+                try{
+                    MultivaluedMap<String, String> header = inputPart.getHeaders();
+                    String filename = "";
+                    InputStream inputStream = inputPart.getBody(InputStream.class,null);
+
+                    saveImage(inputStream, filename, context);
+                    conn.close();
+                } catch (IOException e){
+                    return Response.serverError().build();
                 }
             }
-            return Response.ok().entity(nfts).build();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e){
             return Response.serverError().build();
+        } catch (SQLException se){
+            throw new RuntimeException(se);
+        } catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
         }
-    }*/
+        return Response.status(201).entity("uploaded").build();
+    }
 
    /* @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)

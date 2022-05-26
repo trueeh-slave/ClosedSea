@@ -16,6 +16,12 @@ import java.util.Random;
 
 public class NftService {
 
+    private static Connection conn;
+
+    public NftService(Connection conn){
+        this.conn = conn;
+    }
+
 
     public static List<Nft> getPieces() throws IOException {
         List<Nft> pieces;

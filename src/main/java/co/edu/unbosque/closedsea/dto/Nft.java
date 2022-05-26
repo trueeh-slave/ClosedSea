@@ -1,6 +1,7 @@
 package co.edu.unbosque.closedsea.dto;
 
 import com.opencsv.bean.CsvBindByName;
+import jakarta.servlet.ServletContext;
 
 public class Nft {
     @CsvBindByName
@@ -23,6 +24,9 @@ public class Nft {
         this.author = author;
         this.coins = coins;
         this.path = path;
+    }
+
+    public Nft(String title, String author, int price, String collection, ServletContext context) {
     }
 
     public String getTitle() {

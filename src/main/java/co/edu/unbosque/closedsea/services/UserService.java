@@ -82,30 +82,36 @@ public class UserService {
         return users;
     }
 
+    public User getUser(String username) {
 
-    public static User createUser(String username, String password, String role, String path) throws IOException {
-        String newLine = "\n" + username + "," + password + "," + role + ",0";
-        var outputStream = new FileOutputStream(path + "WEB-INF/classes/" + "users.csv", true);
-        outputStream.write(newLine.getBytes());
-        outputStream.close();
-        return new User(username, password, role, "0");
-    }
+        PreparedStatement stmt = null;
+        User user = null;
 
-    public static Optional<List<Nft>> getUserNfts() throws IOException {
-        List<Nft> nfts;
-        try (InputStream inputStream = UserService.class.getClassLoader().getResourceAsStream("pieces.csv")) {
-            if (inputStream == null) {
-                return Optional.empty();
-            }
-            HeaderColumnNameMappingStrategy<Nft> strategy = new HeaderColumnNameMappingStrategy<>();
-            strategy.setType(Nft.class);
-            //Buffered reader try catch
-            try (BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                CsvToBean<Nft> csvToBean = new CsvToBeanBuilder<Nft>(bf).withType(Nft.class).withMappingStrategy(strategy).withIgnoreLeadingWhiteSpace(true).build();
-                nfts = csvToBean.parse();
+        try {
+
+            stmt = this.conn.prepareStatement("SELECT * FROM user_name WHERE user_name = ?");
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+
+            rs.next();
+
+            user = new User(rs.getString("user_name"),rs.getString("user_password"), rs.getString("role"), rs.getString("user_fcoins"));
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            // Cleaning-up environment
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
             }
         }
-        return Optional.of(nfts);
+        return user;
     }
 
     public List<User> listUsers() {
